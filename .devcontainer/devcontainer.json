@@ -1,0 +1,53 @@
+{
+  "name": "py-ml-base",
+  "dockerComposeFile": ["../docker-compose.yml"],
+  "service": "app",
+  "workspaceFolder": "/workspace",
+
+  "remoteUser": "root",
+
+  // "features": {
+  //   "ghcr.io/devcontainers/features/common-utils:2": {}
+  // },
+
+  "containerEnv": {
+    "UV_PROJECT_ENVIRONMENT": "/opt/venv",
+    "UV_LINK_MODE": "copy"
+  },
+
+  // "mounts": [
+  //   "source=uvcache,target=/home/developer/.cache,type=volume",
+  //   "source=venv,target=/opt/venv,type=volume"
+  // ],
+
+  // "remoteEnv": {
+  //     // Prepend the venv's bin path to the terminal's shell PATH
+  //     "PATH": "/opt/.venv/bin:${containerEnv:PATH}"
+  // },
+  // "postCreateCommand": "cd /workspace && uv venv /opt/venv && . /opt/venv/bin/activate && uv sync --frozen",
+   "postCreateCommand": "bash -lc '[ -x /opt/venv/bin/python ] || uv venv /opt/venv; UV_PROJECT_ENVIRONMENT=/opt/venv uv sync --frozen; grep -qxF \"[ -x /opt/venv/bin/activate ] && source /opt/venv/bin/activate\" ~/.bashrc || echo \"[ -x /opt/venv/bin/activate ] && source /opt/venv/bin/activate\" >> ~/.bashrc'",
+
+  // "postCreateCommand": "bash -lc \"grep -qxF 'source /opt/venv/bin/activate' ~/.bashrc || echo 'source /opt/venv/bin/activate' >> ~/.bashrc\"",
+
+  "postStartCommand": "bash -lc '[ -x /opt/venv/bin/python ] || (uv venv /opt/venv && UV_PROJECT_ENVIRONMENT=/opt/venv uv sync --frozen)'",
+
+  "postAttachCommand": "bash -lc 'source /opt/venv/bin/activate || true' && echo '[postAttach] container attached'",
+
+  "overrideCommand": true,
+
+  
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "python.defaultInterpreterPath": "/opt/venv/bin/python",
+        "python.terminal.activateEnvironment": true
+      },
+      "extensions": [
+        "ms-python.python",
+        "ms-python.vscode-pylance"
+  //       // "charliermarsh.ruff",
+  //       // "ms-toolsai.jupyter"
+      ]
+    }
+  }
+}

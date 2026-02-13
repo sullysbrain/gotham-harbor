@@ -1,0 +1,33 @@
+FROM python:3.12-slim-bookworm
+SHELL ["/bin/bash", "-lc"]
+
+# 1) Non-root user (works nicely in Dev Containers)
+ARG USERNAME=developer UID=1000 GID=1000
+RUN groupadd -g ${GID} ${USERNAME} \
+ && useradd -m -s /bin/bash -u ${UID} -g ${GID} ${USERNAME}
+
+# 2) System deps: stable, ML-friendly
+RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
+      build-essential curl git ca-certificates \
+      pkg-config cmake \
+      libopenblas-dev libomp-dev \
+ && rm -rf /var/lib/apt/lists/*
+
+# 3) uv manager
+FROM python:3.12-slim-trixie
+COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
+
+# 4) Workdir
+WORKDIR /workspace
+RUN chown -R ${USERNAME}:${USERNAME} /workspace
+
+# 5) Dependencies from lock (fast rebuilds if unchanged)
+#    Use guards so image still builds before you add files
+COPY pyproject.toml  ./
+# RUN test -f pyproject.toml && uv venv /opt/venv && . /opt/venv/bin/activate && uv sync --frozen --no-progress || true
+
+# 6) App source LAST (bind mount will overlay, but this keeps image runnable)
+# COPY ./src ./src
+
+# USER ${USERNAME}
+# No CMD here; compose/devcontainer will decide (sleep/app/etc.)

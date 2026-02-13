@@ -1,0 +1,23 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: ./docker/Dockerfile.dev
+    container_name: app
+    working_dir: /workspace
+
+    volumes:
+      - .:/workspace:cached
+      - /opt/venv
+      # - uvcache:/root/.cache
+
+    environment:
+      - PYTHONUNBUFFERED=1
+
+    # Keep container alive for Dev Containers to attach reliably
+    command: sleep infinity
+    # command: bash -lc "python src/main.py" && sleep infinity
+
+volumes:
+  venv:
+  uvcache:

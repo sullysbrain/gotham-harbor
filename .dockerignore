@@ -1,0 +1,16 @@
+
+private/
+
+__pycache__/
+.venv
+.git
+.DS_Store
+
+
+*.pyc
+node_modules/
+.venv
+data/
+# If you store datasets or outputs locally:
+artifacts/
+outputs/

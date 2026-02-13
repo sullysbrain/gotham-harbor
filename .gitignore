@@ -1,13 +1,30 @@
-# Python-generated files
-__pycache__/
-*.py[oc]
-build/
-dist/
-wheels/
-*.egg-info
 
-# Virtual environments
-.venv
-
+# My private files
 _private
 
+# Exclude environment files
+.venv
+.env
+.vscode
+.env.local
+
+# Ignore build directories
+/build
+/dist
+
+# Data
+database/
+
+# Exclude all log files
+*.log
+
+# Dev Containers
+images/
+
+# Caches
+*cache*
+__pycache__/
+*.py[cod]
+
+### OSX ###
+.DS_Store
