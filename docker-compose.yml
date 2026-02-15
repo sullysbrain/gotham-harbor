@@ -9,6 +9,7 @@ services:
     volumes:
       - .:/workspace:cached
       - /opt/venv
+      - /data
       # - uvcache:/root/.cache
 
     environment:

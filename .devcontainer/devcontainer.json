@@ -1,5 +1,5 @@
 {
-  "name": "py-ml-base",
+  "name": "py-datalake-base",
   "dockerComposeFile": ["../docker-compose.yml"],
   "service": "app",
   "workspaceFolder": "/workspace",
@@ -43,8 +43,8 @@
         "python.terminal.activateEnvironment": true
       },
       "extensions": [
-        "ms-python.python",
-        "ms-python.vscode-pylance"
+        "ms-python.python"
+        // "ms-python.vscode-pylance"
   //       // "charliermarsh.ruff",
   //       // "ms-toolsai.jupyter"
       ]
