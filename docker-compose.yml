@@ -20,7 +20,8 @@ services:
 
     # Keep container alive for Dev Containers to attach reliably
     command: sleep infinity
-    # command: bash -lc "python src/main.py" && sleep infinity
+    # command: bash -lc "source /opt/venv/bin/activate && python src/main.py; sleep infinity"
+
 
 volumes:
   venv:
