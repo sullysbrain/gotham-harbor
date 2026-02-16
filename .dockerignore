@@ -10,7 +10,11 @@ __pycache__/
 *.pyc
 node_modules/
 .venv
+
+# Data and databases
 data/
-# If you store datasets or outputs locally:
-artifacts/
-outputs/
+_data/
+lake/
+_lake/
+my_ducklake.ducklake.files
+

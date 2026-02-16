@@ -15,6 +15,11 @@ _private
 # Data
 database/
 data/
+_data/
+lake/
+_lake/
+my_ducklake.ducklake.files
+
 
 # Exclude all log files
 *.log
