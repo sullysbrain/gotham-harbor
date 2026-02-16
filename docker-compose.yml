@@ -12,6 +12,9 @@ services:
       - ./_data:/data
       - ./_lake:/lake
 
+    env_file:
+      - .env
+
     environment:
       - PYTHONUNBUFFERED=1
 
