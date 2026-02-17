@@ -24,7 +24,7 @@ def main():
     # df.write_parquet(path)
     
     # Download to /data/
-    download_blob("gothamstorage", "output.parquet", "/data/my_test.parquet")
+    download_blob("gothamlake", "silver/my_test.parquet", "/data/my_test.parquet")
 
     df = pl.read_parquet("/data/my_test.parquet")
     print(df.head())
@@ -35,8 +35,8 @@ def main():
     print(df.head())
 
     # write then upload 
-    df.write_parquet("/lake/output.parquet")
-    upload_blob("gothamstorage", "output.parquet", "/lake/output.parquet")
+    df.write_parquet("/lake/my_test.parquet")
+    upload_blob("gothamlake", "silver/my_test.parquet", "/lake/my_test.parquet")
 
 
 

@@ -3,6 +3,7 @@
 _private
 
 # Exclude environment files
+venv
 .venv
 .env
 .vscode
