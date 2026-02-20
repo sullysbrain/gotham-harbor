@@ -1,9 +1,9 @@
 import pathlib
+from datetime import datetime, timezone
 
 import polars as pl
 
-from azure_blob import download_blob
-from azure_blob import upload_blob
+from azure_blob import download_blob, upload_blob
 
 # def build_it():
 #     df = pl.DataFrame(
@@ -24,19 +24,36 @@ def main():
     # df.write_parquet(path)
     
     # Download to /data/
-    download_blob("gothamlake", "silver/my_test.parquet", "/data/my_test.parquet")
+    # download_blob("gothamlake", "silver/my_test.parquet", "/data/my_test.parquet")
 
-    df = pl.read_parquet("/data/my_test.parquet")
-    print(df.head())
+    # df = pl.read_parquet("/data/my_test.parquet")
+    # print(df.head())
  
-    df = df.with_columns(
-       (pl.col("a") * 2).alias("a")
-    )
-    print(df.head())
+    # df = df.with_columns(
+    #    (pl.col("a") * 2).alias("a")
+    # )
+    # print(df.head())
 
-    # write then upload 
-    df.write_parquet("/lake/my_test.parquet")
-    upload_blob("gothamlake", "silver/my_test.parquet", "/lake/my_test.parquet")
+    # write then upload
+    # df.write_parquet("/lake/my_test.parquet")
+    # upload_blob("gothamlake", "silver/my_test.parquet", "/lake/my_test.parquet")
+
+    # Append current time to silver/logs.txt
+    log_local = "/data/logs.txt"
+    try:
+        download_blob("gothamlake", "silver/logs.txt", log_local)
+        existing = pathlib.Path(log_local).read_text()
+    except Exception:
+        existing = ""
+    updated = existing + datetime.now(timezone.utc).isoformat() + "\n"
+    pathlib.Path(log_local).write_text(updated)
+    print(f'Updated log file with: {updated}')
+    upload_blob("gothamlake", "silver/logs.txt", log_local)
+
+
+
+
+
 
 
 

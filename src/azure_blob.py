@@ -5,7 +5,7 @@ from azure.storage.blob import BlobServiceClient
 
 def get_blob_service_client() -> BlobServiceClient:
     """Authenticate to Azure Blob Storage using Azure AD (service principal)."""
-    account_name = os.environ["STORAGE_ACCOUNT_NAME"]
+    account_name = os.environ["AZURE_STORAGE_ACCOUNT_NAME"]
     account_url = f"https://{account_name}.blob.core.windows.net"
     credential = DefaultAzureCredential()
     return BlobServiceClient(account_url, credential=credential)

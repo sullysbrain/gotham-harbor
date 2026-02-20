@@ -18,16 +18,12 @@
 
   "postCreateCommand": "bash /workspace/.devcontainer/setup_postCreate.sh",
 
-  // "postStartCommand": "bash -lc '[ -f /opt/venv/bin/python ] || (uv venv /opt/venv && UV_PROJECT_ENVIRONMENT=/opt/venv uv sync) || python src/main.py'",
-
-  "postStartCommand": "bash -lc '[ -f /opt/venv/bin/python ] || (uv venv /opt/venv && UV_PROJECT_ENVIRONMENT=/opt/venv uv sync) && python src/main.py'",
-
+  "postStartCommand": "bash -lc '[ -f /opt/venv/bin/python ] || (uv venv /opt/venv && UV_PROJECT_ENVIRONMENT=/opt/venv uv sync) && [ ! -f /tmp/.main_ran ] && touch /tmp/.main_ran && python src/main.py'",
 
   "postAttachCommand": "echo '[postAttach] container attached'",
 
   "overrideCommand": true,
 
-  
   "customizations": {
     "vscode": {
       "settings": {
@@ -35,8 +31,9 @@
         "python.terminal.activateEnvironment": true
       },
       "extensions": [
-        "ms-python.python"
-      ]
+        "ms-python.python",
+        "ms-azuretools.vscode-azurestorage",
+    ]
     }
   }
 }

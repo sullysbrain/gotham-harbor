@@ -1,8 +1,9 @@
 services:
   app:
-    build:
-      context: .
-      dockerfile: ./docker/Dockerfile.dev
+    image: dbacr2026.azurecr.io/gotham-harbor-app:latest
+    # build:
+      # context: .
+      # dockerfile: ./docker/Dockerfile.dev
     container_name: app
     working_dir: /workspace
 
@@ -11,15 +12,14 @@ services:
       - /opt/venv
       - ./_data:/data
       - ./_lake:/lake
-      - ~/.azure:/home/developer/.azure  # Mount Azure CLI credentials
-      - ~/.azure:/root/.azure             # Fallback if running as root
+      # - ~/.azure:/home/developer/.azure  # Mount Azure CLI credentials
+      # - ~/.azure:/root/.azure             # Fallback if running as root
 
     env_file:
       - .env
 
     environment:
       - PYTHONUNBUFFERED=1
-      - STORAGE_ACCOUNT_NAME=dbgothamstorage
 
 
     # Keep container alive for Dev Containers to attach reliably
