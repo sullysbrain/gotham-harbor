@@ -1,5 +1,5 @@
 {
-  "name": "py-datalake-base",
+  "name": "gotham-lake-base",
   "dockerComposeFile": ["../docker-compose.yml"],
   "service": "app",
   "workspaceFolder": "/workspace",

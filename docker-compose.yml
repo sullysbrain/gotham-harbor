@@ -1,9 +1,11 @@
 services:
   app:
-    image: dbacr2026.azurecr.io/gotham-harbor-app:latest
-    # build:
-      # context: .
-      # dockerfile: ./docker/Dockerfile.dev
+    # image: dbacr2026.azurecr.io/gotham-harbor-app:latest
+    # platform: linux/amd64   # this runs the ACR image in Rosetta emulation mode for mac's arm64/v8
+
+    build:
+      context: .
+      dockerfile: ./docker/Dockerfile.dev
     container_name: app
     working_dir: /workspace
 
