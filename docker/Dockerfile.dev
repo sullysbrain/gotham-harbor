@@ -21,3 +21,4 @@ WORKDIR /workspace
 COPY pyproject.toml ./
 
 # No CMD here; compose/devcontainer will decide (sleep/app/etc.)
+
