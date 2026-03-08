@@ -19,7 +19,8 @@ data/
 _data/
 lake/
 _lake/
-my_ducklake.ducklake.files
+my_ducklake.ducklake.files/
+
 
 
 # Exclude all log files
